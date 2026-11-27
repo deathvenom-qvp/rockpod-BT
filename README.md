@@ -41,7 +41,8 @@ The board solders onto the original 30-pin pads. USB, power, audio and control a
 | 2            | Audio ground         | Bluetooth module audio reference      |
 | 1, 15, 16, 29, 30 | Ground          | Board ground                          |
 
-- **Bluetooth module:** Feasycom FSC-BT1036 family (A2DP Source, controlled by AT commands over UART).
+- **Bluetooth module:** Feasycom FSC-BT1046 (Qualcomm QCC3056, 12.4 × 12.4 mm, aptX), small enough for a one-piece board. Fallback: FSC-BT1035 (same chip, 26.9 × 13 mm, needs a rigid-flex board). Both are A2DP Source modules controlled by AT commands over UART.
+- **Parts list:** [`hardware/BOM.csv`](hardware/BOM.csv), in JLCPCB assembly format. Estimated parts cost is about $12 per board, almost all of it the Bluetooth module.
 - **USB-C:** 5.1 kΩ pull-downs on CC1/CC2 so USB-C chargers supply power. Data stays USB 2.0.
 - **Antenna:** on the 6G/7G, placed at the dock opening, the only gap in the metal case. On the 5G/5.5G, it can face the plastic front instead.
 - **No pairing button.** Pairing is done from the Rockbox menu.
@@ -63,8 +64,19 @@ The board solders onto the original 30-pin pads. USB, power, audio and control a
   - Manage paired devices (connect or forget).
   - Show live connection status from the module's `+A2DPSTAT` events.
 - **Line out follows Bluetooth.** Line out is powered on automatically while Bluetooth is on.
-- **5G/5.5G volume (to test).** If Rockbox's volume setting affects line out on the WM8758, the click wheel can control Bluetooth volume on these models.
+- **Volume from the click wheel.** The QCC transmitter AT command set has `AT+ABSVOL`, which sets the headphones' volume directly, so Rockbox can send its volume to the headphones on every model. The module also reports headphone volume buttons (`+CTVOLUP` / `+CTVOLDN`).
 - **Later:** use headphone buttons (AVRCP) to control Rockbox playback.
+
+### Roadmap: hardware first
+
+The priority is one board that drops into every supported iPod. Firmware work starts once the hardware is proven.
+
+1. **Measure.** Pad positions, and the room behind the connector, on a 5G, 6G and 7G logic board and case. Design to the tightest one, the thin 7G.
+2. **Confirm the module.** Check with Feasycom that the FSC-BT1046 uses the same QCC transmitter AT command set as the FSC-BT1035, and confirm JLCPCB stock.
+3. **Bench test.** Drive the module from a USB-to-serial adapter: scan, pair, connect, line-in audio and absolute volume.
+4. **Measure pad 18 under load.** On each iPod, check the 3.3V accessory supply holds up while the module pairs and streams.
+5. **Prototype the board** and test the fit, the USB-C charging and sync, and the antenna range inside each case.
+6. **Firmware.** Write the Bluetooth driver, the serial shims and the menus.
 
 ---
 
