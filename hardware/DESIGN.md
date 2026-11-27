@@ -12,7 +12,9 @@ The board replaces the 30-pin receptacle and solders straight onto its pads on t
 
 1. **Castellated shield tabs.** The receptacle's two shield pads (31/32, 1.4 × 2.05 mm at x = ±11.65 mm) are large and isolated. The board's side edges carry castellated half-holes over them. They take the mechanical load and are easy to inspect and rework. Confirm with a meter that they are ground on each generation.
 2. **Bottom-side pad row for signals.** The board's underside mirrors the iPod's land pattern, but only where a connection is needed (table below). Unneeded positions are covered by solder mask.
-3. **Pads left partly exposed.** The board stops short of covering the iPod pads: it overlaps about 1.0 mm of each 1.75 mm pad and leaves about 0.7 mm exposed. A fine-tip iron on the exposed end reflows the pre-tinned joint underneath. Our bottom pads are about 0.25–0.3 mm × 0.8 mm, starting 0.2–0.3 mm in from the edge.
+3. **Pads left partly exposed.** The board stops short of covering the iPod pads: it overlaps about 1.0 mm of each 1.75 mm pad and leaves about 0.7 mm exposed. A fine-tip iron on the exposed end reflows the pre-tinned joint underneath. Our bottom pads are 0.28 mm × 1.0 mm (0.78 mm wide where pins are merged) and **run flush to the rear board edge**, so solder flows straight from the exposed iPod pad onto ours with no bare laminate in between.
+
+   **Fab note:** JLCPCB keeps copper 0.2 mm from a routed edge and trims pads that come closer. When ordering, add a note that the bottom pads on the rear edge intentionally reach the outline and must not be trimmed. If the fab trims them anyway, the joint still works, but the solder has to wick 0.2 mm under the board edge first.
 4. **Optional holes in the pads.** A 0.2 mm plated hole in each bottom pad, not covered by solder mask, lets heat and solder in from the top and shows when a joint has taken. Try it on the first prototype.
 5. **Alignment.** Pins through the iPod board's two 1.1 mm locating holes set the position before soldering.
 6. **Plug force.** USB-C insertion force goes into the case through the bezel insert, not into the fine-pitch joints.

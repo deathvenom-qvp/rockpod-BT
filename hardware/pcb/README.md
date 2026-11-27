@@ -32,6 +32,9 @@ KiCad 8 project for EasyEDA Pro import: the complete schematic and a placed (not
 - **Main strip** sits in the 30-pin receptacle's place. It carries the USB-C port, USB ESD protection, the CC resistors and the audio front end.
 - **Extension** reaches back into the case on one side only, as decided, to stay clear of the logic board's other connectors. It carries the Bluetooth module, its supply parts, the RF filter and the antenna. Everything sits in `design.py`, so it can be mirrored to the other side once the iPods are measured.
 - **Rear edge over the pad row** stops 0.125 mm past the pad centreline, leaving the rear 0.75 mm of each iPod pad exposed for a fine-tip iron.
+- **Underside pads run flush to that rear edge** (0.28 × 1.0 mm), so solder flows straight from the exposed iPod pad onto ours. This breaks the usual 0.2 mm copper-to-edge rule on purpose:
+  - Mark it as accepted in EasyEDA's DRC.
+  - Add an order note for JLCPCB not to trim the bottom pads on the rear edge.
 - **Shield tabs:** tab 31 (left) is castellated on the board edge. Tab 32 (right) falls inside the extension, so it gets a plated slot instead, which solder fed from the top flows through.
 - **Alignment holes:** two 1.1 mm holes match the iPod's receptacle locating holes at x = ±6.25 mm.
 - **Antenna:** the module has no antenna of its own. The FSC-BT1046 datasheet says to connect a 50 Ω antenna to RF_IO (pin 7). A chip antenna sits at the front corner, the side facing the dock opening, with a pi-match (R9 fitted with 0 Ω; C10 and C11 left unfitted for tuning) and a copper keep-out on both layers.

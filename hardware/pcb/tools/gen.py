@@ -404,7 +404,7 @@ def checks():
         return D.EXT_X0 <= x <= D.EXT_X1 and D.FRONT_Y <= y <= D.EXT_REAR
 
     for ref, pd in allp:
-        if pd.get("castellated"):
+        if pd.get("castellated") or pd.get("to_edge"):
             continue
         for cx in (-1, 1):
             for cy in (-1, 1):

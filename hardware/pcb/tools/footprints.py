@@ -75,10 +75,14 @@ def ipod_if():
     single = {"1": -7.25, "2": -6.75, "3": -6.25, "4": -5.75, "12": -1.75,
               "13": -1.25, "18": 1.25, "21": 2.75, "23": 3.75, "25": 4.75,
               "27": 5.75}
+    # pads run flush to the rear board edge (D.REAR_Y): solder reaches them
+    # straight from the exposed end of the iPod pad. Order note: do not trim.
+    y0, y1 = -0.875, D.REAR_Y
+    yc, h = (y0 + y1) / 2, y1 - y0
     for n, x in single.items():
-        p.append(smd(n, x, -0.525, 0.28, 0.8, layers=BOT, shape="rect"))
-    p.append(smd("15", 0.0, -0.525, 0.78, 0.8, layers=BOT, shape="rect"))   # 15+16
-    p.append(smd("29", 7.0, -0.525, 0.78, 0.8, layers=BOT, shape="rect"))   # 29+30
+        p.append(dict(smd(n, x, yc, 0.28, h, layers=BOT, shape="rect"), to_edge=True))
+    p.append(dict(smd("15", 0.0, yc, 0.78, h, layers=BOT, shape="rect"), to_edge=True))  # 15+16
+    p.append(dict(smd("29", 7.0, yc, 0.78, h, layers=BOT, shape="rect"), to_edge=True))  # 29+30
     # shield tabs: castellated on the left edge, plated slot on the right
     p.append(dict(name="31", kind="thru_hole", shape="rect", x=D.LEFT_X,
                   y=-2.475, w=1.4, h=2.05, layers=THRU, drill=("round", 1.0),
