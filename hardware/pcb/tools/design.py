@@ -18,7 +18,8 @@ MOD_C = (17.6, 6.9)  # Bluetooth module centre
 OUTLINE = [(LEFT_X, FRONT_Y), (EXT_X1, FRONT_Y), (EXT_X1, EXT_REAR),
            (EXT_X0, EXT_REAR), (EXT_X0, REAR_Y), (LEFT_X, REAR_Y)]
 
-ANT_KEEPOUT = [(20.0, FRONT_Y), (EXT_X1, FRONT_Y), (EXT_X1, -2.6), (20.0, -2.6)]
+# antenna sits in the dock opening, beside the USB-C, behind the plastic bezel insert
+ANT_KEEPOUT = [(5.6, FRONT_Y), (10.6, FRONT_Y), (10.6, -3.8), (5.6, -3.8)]
 
 # ---------------------------------------------------------------- module pins
 NC = None
@@ -68,25 +69,25 @@ PARTS = [
          pos=MOD_C, rot=0, nets={str(k): v[1] for k, v in BT_PINS.items()},
          fit=True, mpn="FSC-BT1046"),
     dict(ref="U2", value="USBLC6-2SC6", fp="SOT-23-6", lcsc="C7519",
-         pos=(7.2, -4.8), rot=0,
+         pos=(8.4, -1.9), rot=0,
          nets={"1": "USB_DN", "2": "GND", "3": "USB_DP", "4": "USB_DP",
                "5": "VBUS", "6": "USB_DN"}, fit=True, mpn="USBLC6-2SC6"),
     dict(ref="J2", value="iPod 30-pin pads", fp="IPOD_IF", lcsc="",
          pos=(0.0, 0.0), rot=0, nets=IPOD_PINS, fit=False, mpn=""),
     dict(ref="ANT1", value="RFANT3216120A5T", fp="ANT_1206", lcsc="C127629",
-         pos=(22.6, -5.3), rot=0, nets={"1": "RF_ANT", "2": NC}, fit=True,
+         pos=(8.3, -5.6), rot=180, nets={"1": "RF_ANT", "2": NC}, fit=True,
          mpn="RFANT3216120A5T"),
     # USB-C
-    dict(ref="R1", value="5.1k", fp="0402", lcsc="C25905", pos=(6.0, -0.75),
+    dict(ref="R1", value="5.1k", fp="0402", lcsc="C25905", pos=(5.8, -0.75),
          rot=0, nets=two("CC1", "GND"), fit=True, mpn="0402WGF5101TCE"),
-    dict(ref="R2", value="5.1k", fp="0402", lcsc="C25905", pos=(7.9, -0.75),
-         rot=0, nets=two("CC2", "GND"), fit=True, mpn="0402WGF5101TCE"),
-    dict(ref="C5", value="100n", fp="0402", lcsc="C307331", pos=(9.8, -0.6),
-         rot=0, nets=two("VBUS", "GND"), fit=True, mpn="CL05B104KB54PNC"),
+    dict(ref="R2", value="5.1k", fp="0402", lcsc="C25905", pos=(9.7, 0.9),
+         rot=90, nets=two("CC2", "GND"), fit=True, mpn="0402WGF5101TCE"),
+    dict(ref="C5", value="100n", fp="0402", lcsc="C307331", pos=(10.3, -0.9),
+         rot=90, nets=two("VBUS", "GND"), fit=True, mpn="CL05B104KB54PNC"),
     # module supply
-    dict(ref="C1", value="22u", fp="0603", lcsc="C59461", pos=(13.6, -5.7),
+    dict(ref="C1", value="22u", fp="0603", lcsc="C59461", pos=(15.3, -5.7),
          rot=0, nets=two("VACC", "GND"), fit=True, mpn="CL10A226MQ8NRNC"),
-    dict(ref="C2", value="22u", fp="0603", lcsc="C59461", pos=(13.6, -4.4),
+    dict(ref="C2", value="22u", fp="0603", lcsc="C59461", pos=(15.3, -4.4),
          rot=0, nets=two("VACC", "GND"), fit=True, mpn="CL10A226MQ8NRNC"),
     dict(ref="C3", value="100n", fp="0402", lcsc="C307331", pos=(13.4, -3.0),
          rot=0, nets=two("VACC", "GND"), fit=True, mpn="CL05B104KB54PNC"),
@@ -99,18 +100,18 @@ PARTS = [
     dict(ref="R12", value="10k", fp="0402", lcsc="C25744", pos=(15.2, -2.0),
          rot=0, nets=two("VACC", "MOD_RST"), fit=True, mpn="0402WGF1002TCE"),
     # UART
-    dict(ref="R3", value="1k", fp="0402", lcsc="C11702", pos=(15.9, -5.7),
+    dict(ref="R3", value="1k", fp="0402", lcsc="C11702", pos=(17.6, -5.7),
          rot=0, nets=two("IPOD_TX", "UART_TO_MOD"), fit=True,
          mpn="0402WGF1001TCE"),
-    dict(ref="R4", value="1k", fp="0402", lcsc="C11702", pos=(15.9, -4.5),
+    dict(ref="R4", value="1k", fp="0402", lcsc="C11702", pos=(17.6, -4.5),
          rot=0, nets=two("UART_FROM_MOD", "IPOD_RX"), fit=True,
          mpn="0402WGF1001TCE"),
     # RF
-    dict(ref="C10", value="DNP", fp="0402", lcsc="", pos=(17.0, -0.6), rot=0,
+    dict(ref="C10", value="DNP", fp="0402", lcsc="", pos=(13.4, -5.6), rot=90,
          nets=two("RF_MOD", "GND"), fit=False, mpn="tune"),
-    dict(ref="R9", value="0R", fp="0402", lcsc="C17168", pos=(18.4, -1.6),
+    dict(ref="R9", value="0R", fp="0402", lcsc="C17168", pos=(12.4, -5.6),
          rot=90, nets=two("RF_ANT", "RF_MOD"), fit=True, mpn="0402WGF0000TCE"),
-    dict(ref="C11", value="DNP", fp="0402", lcsc="", pos=(18.4, -3.3), rot=0,
+    dict(ref="C11", value="DNP", fp="0402", lcsc="", pos=(11.2, -5.6), rot=90,
          nets=two("RF_ANT", "GND"), fit=False, mpn="tune"),
     # audio: series R + DC block near the pads, RF caps at the module
     dict(ref="R5", value="100R", fp="0402", lcsc="C25076", pos=(-9.8, -5.9),
@@ -136,7 +137,7 @@ PARTS = [
          pos=(9.9, MOD_C[1] + 0.5), rot=90, nets=two("AUD_R_N", "AUD_R_P"),
          fit=True, mpn="0402CG101J500NT"),
     # accessory ID (unfitted)
-    dict(ref="R10", value="DNP", fp="0402", lcsc="", pos=(11.0, -5.9), rot=0,
+    dict(ref="R10", value="DNP", fp="0402", lcsc="", pos=(19.6, -5.7), rot=0,
          nets=two("ACC_ID", "GND"), fit=False, mpn="value TBD"),
     # test pads for module firmware / debug
     dict(ref="TP1", value="MOD_USB_DP", fp="TP_1MM", lcsc="", pos=(9.8, 9.3),

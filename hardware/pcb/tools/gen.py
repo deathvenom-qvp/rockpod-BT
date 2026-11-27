@@ -198,7 +198,7 @@ def write_pcb():
     o.append(silk("original 30-pin receptacle body", -10.7, -6.9, 0.5, "Cmts.User"))
     o.append(silk("rockpod-bt v0.1", 14.5, 13.6, 0.7))
     o.append(silk("AGND isolated", -11.0, -6.2 + 0.0, 0.45))
-    o.append(silk("ANT", 21.0, -3.0, 0.6))
+    o.append(silk("ANT", 7.4, -4.2, 0.5))
     o.append(")")
     open(os.path.join(OUT, NAME + ".kicad_pcb"), "w").write("\n".join(o) + "\n")
 

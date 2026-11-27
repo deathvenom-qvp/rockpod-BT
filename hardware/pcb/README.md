@@ -37,7 +37,12 @@ KiCad 8 project for EasyEDA Pro import: the complete schematic and a placed (not
   - Add an order note for JLCPCB not to trim the bottom pads on the rear edge.
 - **Shield tabs:** tab 31 (left) is castellated on the board edge. Tab 32 (right) falls inside the extension, so it gets a plated slot instead, which solder fed from the top flows through.
 - **Alignment holes:** two 1.1 mm holes match the iPod's receptacle locating holes at x = ±6.25 mm.
-- **Antenna (internal, ceramic chip):** the module has no antenna of its own. The FSC-BT1046 datasheet says to connect a 50 Ω antenna to RF_IO (pin 7). A chip antenna sits at the front corner, the side facing the dock opening, with a pi-match (R9 fitted with 0 Ω; C10 and C11 left unfitted for tuning) and a copper keep-out on both layers.
+- **Antenna (internal, ceramic chip, in the dock opening):** the module has no antenna of its own. The FSC-BT1046 datasheet says to connect a 50 Ω antenna to RF_IO (pin 7).
+  - **Placement:** ANT1, a 3.2 × 1.6 mm ceramic chip, sits at the front edge beside the USB-C, inside the old 30-pin opening. On the 6G/7G that opening, behind the plastic bezel insert, is the only gap in the metal case.
+  - **Keep-out:** an area of about 5 × 3 mm around ANT1 has no copper on either layer.
+  - **Matching:** the pi-match sits right beside the antenna. R9 is fitted with 0 Ω; C10 and C11 are left unfitted for tuning.
+  - **Feed line:** RF_MOD runs from module pin 7 to the pi-match as a 50 Ω coplanar line.
+  - **Watch:** the iPod logic board under the old receptacle may carry a ground plane right below the antenna, which will detune it. Plan to tune C10/C11 with the board installed.
 
 ## Assumptions to check first
 
@@ -58,7 +63,7 @@ KiCad 8 project for EasyEDA Pro import: the complete schematic and a placed (not
 - **USB D+/D−:** a 90 Ω differential pair from J1 through U2 to the iPod pads 25/27, kept short.
 - **iPod interface pads (underside):** USB-C pads sit directly above several of them. Fan the bottom pads out on the bottom layer first, then via up to the top clear of J1's pads. Vias under the USB-C body must be tented.
 - **Underside copper:** don't pour on the bottom layer, since it sits on the iPod logic board. Keep bottom traces short and under solder mask.
-- **RF:** RF_MOD → R9 → RF_ANT as a short 50 Ω coplanar line over the top ground pour, stitched with GND vias. No copper of either layer inside the antenna keep-out.
+- **RF:** RF_MOD from module pin 7 to C10/R9/C11 beside the antenna, as a 50 Ω coplanar line over the top ground pour, stitched with GND vias. Keep it clear of the audio pairs and USB D+/D−. No copper of either layer inside the antenna keep-out.
 - **Power:** VACC (pad 18) to C1/C2 (bulk) and C3 (VBAT) / C4 (PIO_POWER) close to the module pins.
 - **Checks after soldering:** see `../DESIGN.md`.
 

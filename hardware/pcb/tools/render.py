@@ -12,7 +12,8 @@ import gen
 fig, ax = plt.subplots(figsize=(12, 7.6))
 ax.add_patch(Polygon(D.OUTLINE, closed=True, fc="#1f5f3a", ec="k", lw=1.2, alpha=0.9))
 ax.add_patch(Polygon(D.ANT_KEEPOUT, closed=True, fc="none", ec="#ffd34d", lw=1, ls="--"))
-ax.text(20.2, -2.9, "antenna keep-out\n(no copper pour)", color="#ffd34d", fontsize=6.5, va="bottom")
+ax.annotate("antenna keep-out in the dock opening\n(no copper, either layer)", (8.1, -6.8), (11.5, -9.2), color="#b8860b", fontsize=6.5,
+            arrowprops=dict(arrowstyle="->", lw=0.6, color="#b8860b"))
 # exposed iPod pads and original receptacle
 ax.add_patch(Rectangle((-10.7, -6.625), 21.4, 6.05, fc="none", ec="#9ad0ff", ls=":", lw=1))
 ax.text(-10.6, -6.95, "original 30-pin body", color="#3a6fb0", fontsize=6.5)
