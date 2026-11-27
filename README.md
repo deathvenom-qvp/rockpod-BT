@@ -14,6 +14,44 @@
 
 ---
 
+## About This Fork: USB-C + Bluetooth for iPod Classic 7G
+
+> **Status: planning / early development.** Nothing below is implemented yet. Everything else in this README describes upstream [Rockpod](https://github.com/nuxcodes/rockpod) and still applies.
+
+This fork adds firmware support for a hardware mod. The mod replaces the iPod Classic 7G's 30-pin dock connector with a custom board that carries a USB-C port and a built-in Bluetooth audio transmitter.
+
+The board solders onto the original 30-pin pads. USB, power, audio and control all come from those pads, so there is no other soldering to the logic board. That keeps the install simple and reversible.
+
+### Hardware
+
+| 30-pin pad   | Signal               | Goes to                               |
+| ------------ | -------------------- | ------------------------------------- |
+| 23, 25, 27   | USB VBUS, D−, D+     | USB-C receptacle (charging + sync)    |
+| 18           | 3.3V accessory power | Bluetooth module supply               |
+| 12 / 13      | Serial TX / RX       | Bluetooth module UART RX / TX         |
+| 3 / 4        | Line out R / L       | Bluetooth module analog input         |
+| 2            | Audio ground         | Bluetooth module audio reference      |
+| 1, 15, 16, 29, 30 | Ground          | Board ground                          |
+
+- **Bluetooth module:** Feasycom FSC-BT1036 family (A2DP Source, controlled by AT commands over UART).
+- **USB-C:** 5.1 kΩ pull-downs on CC1/CC2 so USB-C chargers supply power. Data stays USB 2.0.
+- **Antenna:** placed at the dock opening, the only gap in the 7G's metal case.
+- **No pairing button.** Pairing is done from the Rockbox menu.
+
+### Planned firmware changes
+
+- **Bluetooth menu.** Replaces *System → Accessory Power Supply*. On/off reuses the existing `accessory_supply` setting, which switches PMU LDO6 (pad 18) and powers the module. The config name stays the same, so existing settings files keep working.
+- **Bluetooth UART driver.** Upstream `serial-6g.c` opens the UART only when an accessory is detected, and sends received data to the iAP auto-baud handler. A new build option will open the port at a fixed 115200 8N1 and send data to a Bluetooth driver instead. iAP over USB (MFi digital audio) is unaffected.
+- **Pairing screens:**
+  - Scan for nearby devices, showing name and signal strength.
+  - Pair and connect.
+  - Manage paired devices (connect or forget).
+  - Show live connection status from the module's `+A2DPSTAT` events.
+- **Line out follows Bluetooth.** Line out is powered on automatically while Bluetooth is on.
+- **Later:** use headphone buttons (AVRCP) to control Rockbox playback.
+
+---
+
 Rockpod is a [Rockbox](https://www.rockbox.org) fork for iPod Classic (6th/7th gen, 2007–2014) and iPod Video (5th/5.5th gen, 2005–2006). It adds MFi digital audio output, a rewritten Cover Flow, dynamic album art colors, and SSD-aware power management.
 
 Rockpod supports both HDD and iFlash-modded units. Both iPod models share the same 320x240 display and get the same UI features — Cover Flow, dynamic colors, themes, and rendering improvements. Hardware-specific features like SSD power management and MFi digital audio are iPod Classic only for now. It's a drop-in replacement for the official Rockbox firmware, with no reformatting or data loss.
