@@ -14,11 +14,19 @@
 
 ---
 
-## About This Fork: USB-C + Bluetooth for iPod Classic 7G
+## About This Fork: USB-C + Bluetooth for iPod Classic and iPod Video
 
 > **Status: planning / early development.** Nothing below is implemented yet. Everything else in this README describes upstream [Rockpod](https://github.com/nuxcodes/rockpod) and still applies.
 
-This fork adds firmware support for a hardware mod. The mod replaces the iPod Classic 7G's 30-pin dock connector with a custom board that carries a USB-C port and a built-in Bluetooth audio transmitter.
+This fork adds firmware support for a hardware mod. The mod replaces the iPod's 30-pin dock connector with a custom board that carries a USB-C port and a built-in Bluetooth audio transmitter.
+
+### Target iPods
+
+| Model                    | Rockbox target | Notes                                                                 |
+| ------------------------ | -------------- | --------------------------------------------------------------------- |
+| iPod Classic 7G          | `ipod6g`       | Primary development target                                            |
+| iPod Classic 6G / 6.5G   | `ipod6g`       | Same build and chips as 7G; board fit in thick/thin cases to confirm  |
+| iPod Video 5G / 5.5G     | `ipodvideo`    | Separate serial shim needed; plastic front allows better antenna range |
 
 The board solders onto the original 30-pin pads. USB, power, audio and control all come from those pads, so there is no other soldering to the logic board. That keeps the install simple and reversible.
 
@@ -35,19 +43,27 @@ The board solders onto the original 30-pin pads. USB, power, audio and control a
 
 - **Bluetooth module:** Feasycom FSC-BT1036 family (A2DP Source, controlled by AT commands over UART).
 - **USB-C:** 5.1 kΩ pull-downs on CC1/CC2 so USB-C chargers supply power. Data stays USB 2.0.
-- **Antenna:** placed at the dock opening, the only gap in the 7G's metal case.
+- **Antenna:** on the 6G/7G, placed at the dock opening, the only gap in the metal case. On the 5G/5.5G, it can face the plastic front instead.
 - **No pairing button.** Pairing is done from the Rockbox menu.
+- **One PCB for all models** if measurements confirm the pads line up across the 5G, 6G and 7G. Third-party USB-C boards already fit gen 5–7, which suggests they do.
+
+**To verify on real hardware:**
+- The current limit of the 3.3V accessory supply on each power chip.
+- That the pad positions match across generations.
+- How much room there is behind the connector in each case.
 
 ### Planned firmware changes
 
-- **Bluetooth menu.** Replaces *System → Accessory Power Supply*. On/off reuses the existing `accessory_supply` setting, which switches PMU LDO6 (pad 18) and powers the module. The config name stays the same, so existing settings files keep working.
-- **Bluetooth UART driver.** Upstream `serial-6g.c` opens the UART only when an accessory is detected, and sends received data to the iAP auto-baud handler. A new build option will open the port at a fixed 115200 8N1 and send data to a Bluetooth driver instead. iAP over USB (MFi digital audio) is unaffected.
+- **Bluetooth menu.** Replaces *System → Accessory Power Supply*. On/off reuses the existing `accessory_supply` setting, which switches pad 18 and powers the module: PMU LDO6 on the 6G/7G, the PCF50605 on the 5G/5.5G. The config name stays the same, so existing settings files keep working.
+- **Shared Bluetooth driver.** The driver and menus live in the app layer, so one implementation serves both targets.
+- **Per-target serial shims.** On both targets the dock UART is set up for iAP: it waits for an accessory and auto-detects the baud rate. A new build option will open the port at a fixed 115200 8N1 and send data to the Bluetooth driver instead. That means one shim in `serial-6g.c` (6G/7G) and one in `uart-pp.c` (5G/5.5G). iAP over USB (MFi digital audio) is unaffected.
 - **Pairing screens:**
   - Scan for nearby devices, showing name and signal strength.
   - Pair and connect.
   - Manage paired devices (connect or forget).
   - Show live connection status from the module's `+A2DPSTAT` events.
 - **Line out follows Bluetooth.** Line out is powered on automatically while Bluetooth is on.
+- **5G/5.5G volume (to test).** If Rockbox's volume setting affects line out on the WM8758, the click wheel can control Bluetooth volume on these models.
 - **Later:** use headphone buttons (AVRCP) to control Rockbox playback.
 
 ---
