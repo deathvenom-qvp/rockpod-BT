@@ -61,9 +61,9 @@ def two(n1, n2):
 
 
 PARTS = [
-    dict(ref="J1", value="GT-USB-7010ASV", fp="USB_C_16P_SMD",
-         lcsc="C2988369", pos=(0.0, USB_FACE_Y), rot=0, nets=USB_PINS,
-         fit=True, mpn="GT-USB-7010ASV"),
+    dict(ref="J1", value="TYPE-C 16P QTWT", fp="USB_C_16P_SMD",
+         lcsc="C5187472", pos=(0.0, USB_FACE_Y), rot=0, nets=USB_PINS,
+         fit=True, mpn="TYPE-C 16P QTWT"),
     dict(ref="U1", value="FSC-BT1046", fp="FSC_BT1046", lcsc="C9900132912",
          pos=MOD_C, rot=0, nets={str(k): v[1] for k, v in BT_PINS.items()},
          fit=True, mpn="FSC-BT1046"),

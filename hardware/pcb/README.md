@@ -21,7 +21,7 @@ KiCad 8 project for EasyEDA Pro import: the complete schematic and a placed (not
 1. *File → Import → KiCad*, and select `rockpod-bt-board.kicad_pro` (or the `.kicad_sch` and `.kicad_pcb`).
 2. **Replace U1 and J1 with EasyEDA library parts:**
    - U1: search `C9900132912` (FSC-BT1046).
-   - J1: search `C2988369` (G-Switch GT-USB-7010ASV).
+   - J1: search `C5187472` (SHOU HAN TYPE-C 16P QTWT).
 
    Then *Update PCB from schematic*. Every other footprint is a standard 0402, 0603, SOT-23-6 or 1206 land pattern.
 3. Check the board against the "Assumptions" list, then route with the rules below.
@@ -42,7 +42,7 @@ KiCad 8 project for EasyEDA Pro import: the complete schematic and a placed (not
 ## Assumptions to check first
 
 1. **U1 pin 1 position.** The FSC-BT1046 datasheet's text gives the pin table, the 1.0 mm pitch and the 12.4 mm body, but not where pin 1 sits. This footprint assumes pin 1 at the front-left corner, numbered counter-clockwise. The EasyEDA library footprint for C9900132912 settles it, and parts around the module may need to move once it's in.
-2. **J1 is the G-Switch GT-USB-7010ASV (C2988369):** a 16-pin USB 2.0 surface-mount receptacle, 8.64 × 7.35 × 3.26 mm. It replaces the HRO TYPE-C-31-M-12, whose through-hole shell legs would poke through the underside that sits on the iPod. Its land-pattern drawing wasn't readable here, so the J1 footprint is a generic 16-pin pattern. When you place the EasyEDA footprint, confirm the shell tabs are SMD pads with no holes or pegs.
+2. **J1 is the SHOU HAN TYPE-C 16P QTWT (C5187472):** a 16-pin USB-C receptacle that LCSC lists as fully surface-mount, with no through-hole shell legs, 7.35 mm long. It replaces the HRO TYPE-C-31-M-12 and G-Switch GT-USB-7010ASV, which both have through-hole shell legs. The J1 footprint here is a generic 16-pin pattern, so use the EasyEDA library footprint.
 3. **USB-C depth.** A USB-C receptacle is about 7.35 mm long. The 30-pin body was about 6.6 mm deep, and the board can't run past the pad row. So the USB-C mouth sits 0.45 mm proud of the board front, about 0.6 mm past where the 30-pin mouth was. Check that against the case opening.
 4. **Case clearance.** Check the extension (x = 9 to 24.8 mm, y up to 14 mm behind the pad row) against parts on the logic board and the curve of the case corner.
 5. **Pad positions.** The iPod pad row comes from SparkFun's footprint. The contact row in the 3D model in `../reference/ipod-30pin/3d` agrees: 30 tails at 0.5 mm pitch, centred ±7.25 mm.
