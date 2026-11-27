@@ -4,7 +4,8 @@ Bluetooth audio TX module QCC3056,U1,FSC-BT1046 (44-pin stamp),C9900132912,1,FSC
 USB ESD protection,U2,SOT-23-6L,C7519,1,USBLC6-2SC6,STMicroelectronics,
 5.1k 1% CC pull-down,"R1,R2",0402,C25905,2,0402WGF5101TCE,UNI-ROYAL,
 1k 1% UART series,"R3,R4",0402,C11702,2,0402WGF1001TCE,UNI-ROYAL,
-0R line-in series link,"R5,R6,R7,R8",0402,C17168,4,0402WGF0000TCE,UNI-ROYAL,Replace with attenuator if line out clips the ADC
+100R audio series (RF filter),"R5,R6,R7,R8",0402,C25076,4,0402WGF1000TCE,UNI-ROYAL,One per leg of each audio pair; fit 0R (C17168) to bypass the filter
 22uF 6.3V X5R bulk,"C1,C2",0603,C59461,2,CL10A226MQ8NRNC,Samsung Electro-Mechanics,
 100nF 50V X7R decoupling,"C3,C4,C5",0402,C307331,3,CL05B104KB54PNC,Samsung Electro-Mechanics,
-1uF 25V X5R line-in DC block,"C6,C7,C8,C9",0402,C52923,4,CL05A105KA5NQNC,Samsung Electro-Mechanics,
+1uF 25V X5R line-in DC block,"C6,C7,C8,C9",0402,C52923,4,CL05A105KA5NQNC,Samsung Electro-Mechanics,Pseudo-differential: L-/R- legs from pad 2 (AGND)
+100pF 50V C0G RF filter across each audio pair,"C12,C13",0402,C1546,2,0402CG101J500NT,FH,At the module input pins
