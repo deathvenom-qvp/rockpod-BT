@@ -42,6 +42,7 @@ The board solders onto the original 30-pin pads. USB, power, audio and control a
 | 1, 15, 16, 29, 30 | Ground          | Board ground                          |
 
 - **Bluetooth module:** Feasycom FSC-BT1046 (Qualcomm QCC3056, 12.4 × 12.4 mm, aptX), small enough for a one-piece board. Fallback: FSC-BT1035 (same chip, 26.9 × 13 mm, needs a rigid-flex board). Both are A2DP Source modules controlled by AT commands over UART.
+- **Attach and audio design:** [`hardware/DESIGN.md`](hardware/DESIGN.md). The board solders onto the receptacle's pads: castellated edges on the two shield tabs, and a bottom-side pad row for the signals (only the pins we use), left partly exposed so a fine-tip iron can reflow it. Audio ground (pin 2) stays isolated from GND, and each audio channel runs as a pseudo-differential pair with an RF filter.
 - **30-pin reference CAD:** [`hardware/reference/ipod-30pin`](hardware/reference/ipod-30pin) has the receptacle's footprint and symbol for Eagle and KiCad, from SparkFun's library. Still to be checked against a real logic board.
 - **Parts list:** [`hardware/BOM.csv`](hardware/BOM.csv), in JLCPCB assembly format. Estimated parts cost is about $12 per board, almost all of it the Bluetooth module.
 - **USB-C:** 5.1 kΩ pull-downs on CC1/CC2 so USB-C chargers supply power. Data stays USB 2.0.
