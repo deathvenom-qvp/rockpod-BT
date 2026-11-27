@@ -46,7 +46,13 @@ Pin numbers follow the common pinouts.ru / iFixit tables. Some sources number th
 
 ## 3D model
 
-No 3D model is included. I couldn't find one under a license that allows redistribution. A free STEP model of a 30-pin socket ("Iphone 30pin Socket Connector") is on GrabCAD, which needs a login to download. For checking fit, a block of the body outline above (21.4 × 6.05 mm) is enough to start with.
+`3d/Iphone4s-Socket.STEP` (with a rendering) is the free "Iphone 30pin Socket Connector" model from GrabCAD, author Ryan (2016). It's a model of the **iPhone 4S** dock socket, not the iPod Classic's, so use it with care:
+
+- **Contacts match.** 30 tails at 0.5 mm pitch, centred at x = ±7.25 mm, the same as the SparkFun land pattern above.
+- **Size is close.** The body is about 6.7 mm deep and 3.9 mm tall above the board. The contact tails sit along the edge opposite the mouth.
+- **Mounting differs.** Its screw ears reach x = ±16 mm and its locating pegs sit at about x = ±9.7 mm, 0.7 mm below the board. The iPod's locating holes are at ±6.25 mm.
+
+It is redistributed here for reference under GrabCAD's community terms. Remove it if those terms don't allow that.
 
 ## Sources and license
 
