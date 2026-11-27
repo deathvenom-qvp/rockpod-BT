@@ -1,5 +1,5 @@
 Comment,Designator,Footprint,LCSC Part #,Quantity,MPN,Manufacturer,Notes
-USB-C receptacle 16P USB 2.0,J1,TYPE-C-31-M-12,C165948,1,TYPE-C-31-M-12,Korean Hroparts Elec,PLACEHOLDER: this part has through-hole shell legs; swap for an all-SMD 16P receptacle (the underside sits on the iPod)
+USB-C receptacle 16P USB 2.0,J1,GT-USB-7010ASV,C2988369,1,GT-USB-7010ASV,G-Switch,8.64 x 7.35 x 3.26 mm; confirm shell tabs are SMD in the EasyEDA footprint
 Bluetooth audio TX module QCC3056,U1,FSC-BT1046 (44-pin stamp),C9900132912,1,FSC-BT1046,Feasycom,JLCPCB-sourced; confirm stock and AT command set first. Fallback: FSC-BT1035 C9900057927 (needs rigid-flex)
 USB ESD protection,U2,SOT-23-6L,C7519,1,USBLC6-2SC6,STMicroelectronics,
 5.1k 1% CC pull-down,"R1,R2",0402,C25905,2,0402WGF5101TCE,UNI-ROYAL,

@@ -29,10 +29,10 @@ def sot23_6():
 
 
 def usb_c():
-    """Generic USB-C 16P USB 2.0 land pattern, all-SMD shell.
-
-    Origin at the centre of the mouth; the body extends +y. Placeholder:
-    replace with the EasyEDA library footprint of the part you buy.
+    """USB-C 16P USB 2.0 land pattern for G-Switch GT-USB-7010ASV (C2988369),
+    8.64 x 7.35 mm body. Generic pad layout: replace with the EasyEDA library
+    footprint for C2988369 and confirm its shell tabs are SMD (no holes).
+    Origin at the centre of the mouth; the body extends +y.
     """
     sig = [("A1B12", -3.25, 0.6), ("A4B9", -2.45, 0.6), ("B8", -1.75, 0.3),
            ("A5", -1.25, 0.3), ("B7", -0.75, 0.3), ("A6", -0.25, 0.3),
@@ -42,7 +42,7 @@ def usb_c():
     for sx in (-4.6, 4.6):
         for sy in (1.6, 5.0):
             p.append(smd("SH", sx, sy, 1.0, 1.6, shape="rect"))
-    return p, (8.94, 7.35)
+    return p, (8.64, 7.35)
 
 
 def bt1046():

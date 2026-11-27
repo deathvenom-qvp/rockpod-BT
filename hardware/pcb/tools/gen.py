@@ -352,7 +352,7 @@ def write_sch():
         (20, 26, "AGND (iPod pin 2) is isolated: never tie it to GND on this board."),
         (20, 32, "Audio runs as pseudo-differential pairs: LINE_L/AGND and LINE_R/AGND."),
         (20, 38, "U1 pin numbering from the FSC-BT1046 datasheet; footprint pin-1 position assumed."),
-        (20, 44, "J1 must be an all-SMD USB-C (no through-hole shell legs): the underside sits on the iPod."),
+        (20, 44, "J1 GT-USB-7010ASV (C2988369): confirm in EasyEDA that its shell tabs are SMD, since the underside sits on the iPod."),
     ]
     for x, y, t in notes:
         body.append('  (text %s (exclude_from_sim no) (at %s %s 0) (effects (font (size 1.5 1.5)) '

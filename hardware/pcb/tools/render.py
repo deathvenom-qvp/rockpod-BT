@@ -38,7 +38,7 @@ for part in D.PARTS:
     if part["ref"] not in ("J2",):
         px, py = part["pos"]
         if part["fp"] == "USB_C_16P_SMD":
-            ax.add_patch(Rectangle((px - 4.47, py), 8.94, 7.35, fc="none", ec="white", lw=0.8, ls="--", zorder=6))
+            ax.add_patch(Rectangle((px - 4.32, py), 8.64, 7.35, fc="none", ec="white", lw=0.8, ls="--", zorder=6))
             ax.text(px, py + 3.4, "J1 USB-C", ha="center", color="white", fontsize=8, zorder=7)
         elif part["fp"] == "FSC_BT1046":
             ax.add_patch(Rectangle((px - 6.2, py - 6.2), 12.4, 12.4, fc="none", ec="white", lw=0.8, ls="--", zorder=6))
