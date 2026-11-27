@@ -42,6 +42,7 @@ The board solders onto the original 30-pin pads. USB, power, audio and control a
 | 1, 15, 16, 29, 30 | Ground          | Board ground                          |
 
 - **Bluetooth module:** Feasycom FSC-BT1046 (Qualcomm QCC3056, 12.4 × 12.4 mm, aptX), small enough for a one-piece board. Fallback: FSC-BT1035 (same chip, 26.9 × 13 mm, needs a rigid-flex board). Both are A2DP Source modules controlled by AT commands over UART.
+- **30-pin reference CAD:** [`hardware/reference/ipod-30pin`](hardware/reference/ipod-30pin) has the receptacle's footprint and symbol for Eagle and KiCad, from SparkFun's library. Still to be checked against a real logic board.
 - **Parts list:** [`hardware/BOM.csv`](hardware/BOM.csv), in JLCPCB assembly format. Estimated parts cost is about $12 per board, almost all of it the Bluetooth module.
 - **USB-C:** 5.1 kΩ pull-downs on CC1/CC2 so USB-C chargers supply power. Data stays USB 2.0.
 - **Antenna:** on the 6G/7G, placed at the dock opening, the only gap in the metal case. On the 5G/5.5G, it can face the plastic front instead.
